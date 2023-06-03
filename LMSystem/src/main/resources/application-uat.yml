@@ -1,0 +1,94 @@
+spring:
+  mail:
+    properties:
+      mail:
+        smtp:
+          starttls:
+            enable: 'true'
+          auth: 'true'
+    host: mail.cmcglobal.vn
+    username: lms@cmcglobal.vn
+    password: 123456a@@
+    port: '587'
+  http:
+    multipart:
+      enabled: 'true'
+  messages:
+    basename: messages
+    encoding: UTF-8
+  datasource:
+    url: jdbc:postgresql://localhost/my_project
+    username: postgres
+    password: postgres
+
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
+            client-secret: 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
+            client-id: 225242802114-uo3b9dld6i2tsj752quc3m64ij33pgha.apps.googleusercontent.com
+            redirect-uri: http://localhost:8088/users/login-google
+
+
+  #    url: jdbc:h2:mem:testdb;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
+  #    driverClassName: org.h2.Driver
+  #    username: sa
+  #    password: ''
+
+  tomcat:
+    max-wait: 20000
+    max-active: 50
+    max-idle: 20
+    min-idle: 15
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        #        dialect: org.hibernate.dialect.H2Dialect
+        #        dialect: org.hibernate.dialect.MySQL8Dialect
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        format_sql: true
+        id:
+          new_generator_mappings: false
+    show-sql: true
+  servlet:
+    multipart:
+      max-request-size: 200000KB
+      max-file-size: 200000KB
+
+server:
+  port: 8088 # This is the default port anyway, but you can change it here
+
+security:
+  jwt:
+    token:
+      secret-key: ntlong6
+      expire-length: 86400000 # 5 minutes duration by default: 5 minutes * 60 seconds * 1000 miliseconds
+
+# Logger configuration
+logging:
+  file:
+    #name: D:/logs/lms/lms-application-debug-dev.log
+    name: /logs/lms-application-debug-dev.log
+  pattern:
+    #    console: "%clr %d{yyyy-MM-dd HH:mm:ss} - %msg%n"
+    file: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"
+  level:
+    root: INFO
+    org.springframework.web: INFO
+    org.hibernate: INFO
+    org.springframework: INFO
+
+api:
+  upload:
+    file:
+      certificate: /lms/certificates/
+      certificate-image: /lms/certificate-image/image.png
+
+amazonProperties:
+  endpointUrl: https://s3.us-east-2.amazonaws.com
+  accessKey: AKIAX3BD3XS5VLG7OTJU
+  secretKey: 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
+  bucketName: my-lms-project

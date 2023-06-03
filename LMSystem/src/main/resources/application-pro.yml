@@ -1,0 +1,96 @@
+spring:
+  mail:
+    properties:
+      mail:
+        smtp:
+          starttls:
+            enable: 'true'
+          auth: 'true'
+    host: mail.cmcglobal.vn
+    username: lms@cmcglobal.vn
+    password: 123456a@@
+    port: '587'
+  messages:
+    basename: messages
+    encoding: UTF-8
+  datasource:
+#    url: jdbc:mysql://192.168.66.128:6033/spring_jwt?useSSL=false&useUnicode=true&characterEncoding=UTF-8
+#    username: root
+#    password: root
+
+    url: jdbc:postgresql://192.168.66.128:5432/lms
+    username: user
+    password: password
+
+#    url: jdbc:h2:mem:testdb;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
+#    driverClassName: org.h2.Driver
+#    username: sa
+#    password: ''
+
+  tomcat:
+    max-wait: 20000
+    max-active: 50
+    max-idle: 20
+    min-idle: 15
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    properties:
+      hibernate:
+#        dialect: org.hibernate.dialect.H2Dialect
+#        dialect: org.hibernate.dialect.MySQL8Dialect
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        format_sql: true
+        id:
+          new_generator_mappings: false
+  servlet:
+    multipart:
+      max-request-size: 200000KB
+      max-file-size: 200000KB
+
+server:
+   port: 8088 # This is the default port anyway, but you can change it here
+
+security:
+  jwt:
+    token:
+      secret-key: secret-key
+      expire-length: 300000 # 5 minutes duration by default: 5 minutes * 60 seconds * 1000 miliseconds
+
+authen:
+  ldap:
+    key: rts-test
+    secret: rts-test
+  url:
+    login:
+      ldap: https://gateway.cmcglobal.com.vn/poa/sso/login
+    logout:
+      ldap: https://gateway.cmcglobal.com.vn/poa/sso/logout
+
+skill:
+  name:
+    url: https://skills.cmcglobal.com.vn/api/setting/getSkillNameList
+
+hrms:
+  api:
+    url: https://hrms.cmcglobal.com.vn/api/connector/connector/api/employee/
+UserController:
+  signin: Authenticates user and returns its JWT token.
+  signup: Creates user and returns its JWT token
+  delete: Deletes specific user by username
+  search: Returns specific user by username
+  me: Returns current user's data
+UploadFileController:
+  upload: Upload a file
+  uploadMultiFile: Upload multiple  files
+
+
+
+file:
+  type:
+    param: CV, ICON, AVATAR, IMAGES, OTHER
+api:
+  upload:
+    file:
+      url: https://media.cmcglobal.com.vn/
+      certificate: /lms/certificates/
